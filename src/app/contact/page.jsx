@@ -1,8 +1,9 @@
 import React from 'react'
+import style from './page.module.css'
 
 function Contact() {
   return (
-    <div>Contact</div>
+    <div className={style.contact}>Contact</div>
   )
 }
 
