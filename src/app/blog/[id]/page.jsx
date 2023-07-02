@@ -6,7 +6,7 @@ import {notFound} from 'next/navigation'
 
   //CSR
   async function getData(id) {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`,{
+    const res = await fetch(`http://localhost:3000/api/posts/${id}`,{
       cache:'no-store',
       // next:{revalidate:10}
     });
@@ -16,6 +16,19 @@ import {notFound} from 'next/navigation'
     }
   
     return res.json();
+  }
+
+  //metadata
+  export async function generateMetadata({params}){
+
+    const post = await getData(params.id)
+
+    return{
+      title:post.title,
+      description:post.desc
+
+
+    }
   }
 
   
@@ -38,17 +51,17 @@ async function BlogPost({ params }) {
         {/* info */}
         <div className={styles.info}>
           <h1 className={styles.title}>{data.title}</h1>
-          <p className={styles.desc}>{data.body}</p>
+          <p className={styles.desc}>{data.desc}</p>
           <div className={styles.author}>
             <Image
               // src={data.img}
-              src="https://images.pexels.com/photos/16796400/pexels-photo-16796400/free-photo-of-woman-posing-in-red-clothes-near-leaf.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={data.img}
               alt=""
               width={40}
               height={40}
               className={styles.avatar}
             />
-            <span className={styles.username}>Jhon Doe</span>
+            <span className={styles.username}>{data.username}</span>
           </div>
         </div>
 
@@ -56,7 +69,7 @@ async function BlogPost({ params }) {
         {/* imagen */}
         <div className={styles.imageContainer}>
           <Image
-            src="https://images.pexels.com/photos/16796400/pexels-photo-16796400/free-photo-of-woman-posing-in-red-clothes-near-leaf.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src={data.img}
             alt=""
             fill={true}
             className={styles.image}
@@ -69,7 +82,7 @@ async function BlogPost({ params }) {
 
       {/* content */}
       <div className={styles.content}>
-        <p className={styles.text}>Contenido</p>
+        <p className={styles.text}>{data.content}</p>
       </div>
     </div>
   );

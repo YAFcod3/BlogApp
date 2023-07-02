@@ -5,13 +5,15 @@ import Image from "next/image";
 
 //CSR
 async function getData() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts",{
+  const res = await fetch("http://localhost:3000/api/posts"
+  // ,{
     // cache:'no-store',
-    next:{revalidate:10}
-  });
+    // next:{revalidate:10} }
+  );
 
   if (!res.ok) {
-    throw new Error("Failed to the fetch data");
+    // throw new Error("Failed to the fetch data");
+    console.log('error')
   }
 
   return res.json();
@@ -34,12 +36,12 @@ async function Blog() {
 
       {data.map((item) => (
         
-          <Link href={`/blog/${item.id}`} className={styles.container} key={item.id}>
+          <Link href={`/blog/${item._id}`} className={styles.container} key={item._id}>
             {/* image */}
             <div className={styles.imageContainer}>
               <Image
-                // src={item.img}
-                src="https://images.pexels.com/photos/16796400/pexels-photo-16796400/free-photo-of-woman-posing-in-red-clothes-near-leaf.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                src={item.img}
+                // src="https://images.pexels.com/photos/16796400/pexels-photo-16796400/free-photo-of-woman-posing-in-red-clothes-near-leaf.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
                 width={400}
                 height={250}
