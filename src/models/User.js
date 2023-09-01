@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 
 const {Schema}= mongoose
 
-const userSchema = new Schema ({
+const userSchema = new Schema (
+  
+  {
 
   name:{
 
@@ -28,5 +30,6 @@ const userSchema = new Schema ({
 {timestamps:true}
 )
 
+const modelUser= mongoose.models.User || mongoose.model('User',userSchema);
+export default modelUser
 
-export default mongoose.model('User',userSchema);

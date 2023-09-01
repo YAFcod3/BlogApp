@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import {notFound} from 'next/navigation'
 
 
-  //CSR
+  //SSR
   async function getData(id) {
     const res = await fetch(`http://localhost:3000/api/posts/${id}`,{
       cache:'no-store',

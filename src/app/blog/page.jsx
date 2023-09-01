@@ -2,8 +2,8 @@ import Link from "next/link";
 import React from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
-
-//CSR
+import { notFound } from "next/navigation";
+//SSR
 async function getData() {
   const res = await fetch("http://localhost:3000/api/posts"
   // ,{
@@ -13,8 +13,7 @@ async function getData() {
 
   if (!res.ok) {
     // throw new Error("Failed to the fetch data");
-    console.log('error')
-  }
+    return notFound()  }
 
   return res.json();
 }
@@ -41,7 +40,7 @@ async function Blog() {
             <div className={styles.imageContainer}>
               <Image
                 src={item.img}
-                // src="https://images.pexels.com/photos/16796400/pexels-photo-16796400/free-photo-of-woman-posing-in-red-clothes-near-leaf.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              
                 alt=""
                 width={400}
                 height={250}
