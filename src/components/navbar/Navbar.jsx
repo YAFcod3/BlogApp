@@ -60,7 +60,7 @@ function Navbar() {
 
         {session.status === 'authenticated' &&
         
-        <button className={styles.logout} onClick={()=>{signOut}}>Logout</button>
+        <button className={styles.logout} onClick={signOut}>Logout</button>
         }
       </div>
     </div>
